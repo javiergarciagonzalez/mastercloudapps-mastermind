@@ -1,0 +1,37 @@
+@startuml Mastermind
+skinparam Style strictuml
+
+title Mastermind
+
+class Mastermind
+class Board
+interface Code
+class SecretCode
+class GuessCode
+class FeedbackCode
+
+enum GuessColor {
+    Red
+    Blue
+    Green
+    Yellow
+    Orange
+}
+
+enum FeedbackColor {
+    Black
+    White
+}
+
+Mastermind "1" *-- "1" Board
+Code <|--- SecretCode
+Code <|--- GuessCode
+
+Board "1" *--- "1" SecretCode
+Board "0" o--- "10" GuessCode
+Board "0" o--- "10" FeedbackCode
+
+GuessCode o-- GuessColor
+FeedbackCode o-- FeedbackColor
+
+@enduml
