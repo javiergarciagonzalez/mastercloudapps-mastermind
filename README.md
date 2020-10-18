@@ -20,3 +20,7 @@ Entrega de un proyecto público en git varias ramas:
     * Requisitos: https://github.com/USantaTecla-ticTacToe/tictactoe.requirements/tree/1.Basica
     * Diseño: https://github.com/USantaTecla-ticTacToe/tictactoe/tree/documentView/docs
     * Implementación: https://github.com/USantaTecla-ticTacToe/tictactoe/tree/documentView/src/main/java/usantatecla
+
+
+## Domain Model
+![Mastermind domain model](https://raw.githubusercontent.com/javiergarciagonzalez/mastercloudapps-mastermind/main/out/mastermind/domainModel/domainModel/Mastermind.png)
