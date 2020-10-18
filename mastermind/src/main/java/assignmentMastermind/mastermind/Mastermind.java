@@ -1,11 +1,12 @@
-package mastermindmastermind;
+package assignmentMastermind.mastermind;
+
+
 
 /**
- * Hello world!
+ * Mastermind game
  *
  */
-public class App 
-{
+public class Mastermind {
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
