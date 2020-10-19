@@ -1,0 +1,287 @@
+= Master Mind. Solución 1.1. *domainModel*
+Santa Tecla <parqueNaturalSantaTecla@gmail.com>
+:toc-title: Índice
+:toc: left
+
+:idprefix:
+:idseparator: -
+:imagesdir: images
+
+== Requisitos 1. *Básica*
+
+[cols="50,50"]
+|===
+
+a|
+- link:https://en.wikipedia.org/wiki/Mastermind_(board_game)[*Wiki*] - link:https://www.youtube.com/watch?v=2-hTeg2M6GQ[*Youtube*]
+* _Funcionalidad: **Básica**_
+* _Interfaz: **Texto**_
+* _Distribución: **Standalone**_
+* _Persistencia: **No**_
+
+a|
+
+image::Dibujo.jpg[]
+
+|===
+
+== Vista de Lógica/Diseño
+
+- Aplicación del *Modelo del Dominio* mediante Estrategias de *Análisis Formal*, *Análisis Clásico*, *Experto del Dominio*, *Reparto de Responsabilidades*, ...
+
+=== Arquitectura
+
+[plantuml,version1Arquitectura,svg]
+....
+
+package usantatecla.mastermind #DDDDDD { } 
+package java.util{ }
+package usantatecla.utils #DDDDDD { } 
+package java.io{ }
+
+usantatecla.mastermind .down.> java.util
+usantatecla.mastermind .down.> usantatecla.utils
+usantatecla.utils .down.> java.io
+
+....
+
+=== Paquetes
+
+[plantuml,version1Mastermind,svg]
+....
+
+package usantatecla.mastermind {
+class Mastermind {
+	+ void play()
+	- void playGame()
+	- boolean isResumedGame() 
+	+ {static} void main(String[] args)
+}
+
+
+class Board {
+  - {static} {final} int MAX_ATTEMPS = 10;
+  int attempts;
+  Board()
+  + void writeln()
+  + void add(ProposedCombination)
+  +  boolean isFinished()
+  + boolean isWinner()
+  - boolean isLooser()
+}
+
+abstract class Combination {
+	~ Combination ()
+}
+
+class SecretCombination {
+	SecretCombination() 
+	Result getResult(ProposedCombination)
+	void writeln()
+}
+  
+class ProposedCombination {
+void write()
+	void read() 
+	- Error checkError(String)
+	boolean contains(Color, int) 
+	boolean contains(Color) 
+}
+  
+class Result{
++ {static} {fina} int WIDTH = 4;
+	- int blacks
+	- int whites
+	Result(int, int) 
+	boolean isWinner() 
+	void writeln() 
+}
+
+enum Color {
+	RED
+	BLUE
+	YELLOW
+	GREEN
+	ORANGE
+	PURPLE
+	NULL_COLOR
+	- char initial;
+	- Color() 
+	- Color(char)
+	{static} String getInitials()
+	{static} int length() 
+	{static} Color get(int)
+	void write()
+	boolean isNull()
+}
+
+enum Error {
+	DUPLICATED
+	WRONG_CHARACTERS
+	WRONG_LENGTH
+	NULL_ERROR
+	- String message;
+	- Error()
+	- Error(String) 
+	void writeln()
+	+ boolean isNull()
+	
+}
+
+enum Message {
+	ATTEMPTS
+	SECRET 
+	RESUME
+	RESULT
+	PROPOSED_COMBINATION
+	TITLE
+	WINNER
+	LOOSER
+	- String message;
+	- Message(String)
+	void write()
+	void writeln() 
+	void writeln(int)
+	void writeln(int, int)
+}
+
+
+
+Mastermind *-down-> Board : board
+Mastermind .down.> ProposedCombination
+Board *-down-> SecretCombination : secretCombination
+Board o-down-> "0..10" ProposedCombination : proposedCombinations
+Board o-down-> "0..10" Result : results
+
+Combination *-down-> "4" Color : colors
+Combination <|-down- SecretCombination
+Combination <|-down- ProposedCombination
+ProposedCombination .down.> Error
+
+
+Mastermind .down.> Message
+Board .down.> Message
+ProposedCombination .down.> Message
+Result .down.> Message
+  
+}
+
+package usantatecla {
+
+class Console {
+
+	+ {static} Console console;
+	+ {static} Console instance()
+	- BufferedReader bufferedReader
+	+ String readString(String)
+	+ String readString()
+	+ int readInt(String)
+	+ char readChar(String)
+	+ void writeln()
+	+ void write(String) 
+	+ void write(int)
+	+ void writeln(String)
+	+ void writeln(int)
+	+ void write(char)
+	+ void writeError(String)
+}
+
+class YesNoDialog {
+
+	- {static} final char AFFIRMATIVE
+	- {static} final char NEGATIVE
+	- {static} final String SUFFIX
+	- {static} final String MESSAGE 
+	- char answer;
+	+ boolean read(String)
+	- boolean isAfirmative()
+	- char getAnswer()
+	- boolean isNegative()
+
+}
+
+}
+
+YesNoDialog .down.> Console
+Board .down.> Console
+Color .down.> Console
+Error .down.> Console
+Message .down.> Console
+ProposedCombination .down.> Console
+SecretCombination .down.> Console
+Mastermind .down.> YesNoDialog
+
+....
+
+== Calidad del Software
+
+=== Diseño
+
+- [red]#_**Método largo**: Método "play" de Mastermind,..._#
+
+=== Rediseño
+
+- _Nueva interfaz: Gráfica_
+* [red]#_**Clases Grandes**: los Modelos asumen la responsabilidad y crecen en líneas, métodos, atributos, ... con cada nueva tecnología_#
+* [red]#_**Alto acoplamiento**: los Modelos con cada nueva tecnología de interfaz (consola, gráficos, web, ...)_#
+* [red]#_**Baja cohesión**: cada Modelo está gestionando sus atributos y las tecnologías de interfaz_#
+* [red]#_**Open/Close**: hay que modificar los modelos que estaban funcionando previamente para escoger una tecnología de vista u otra (if's anidados)_#
+
+- _Nuevas funcionalidades: undo/redo, demo, estadísiticas,..._
+* [red]#_**Clases Grandes**: los Modelos asumen la responsabilidad y crecen en líneas, métodos, atributos, ... con las nuevas funcionalidades_#
+* [red]#_**Open/Close**: hay que modificar los modelos que estaban funcionando previamente para incorporar nuevas funcionalidades_#
+
+== Vista de Desarrollo/Implementación
+
+[plantuml,diagramaImplementacion,svg]
+....
+
+package "  "  as mastermind {
+}
+package "  "  as mastermind.utils {
+}
+package "  "  as java.io {
+}
+package "  "  as java.util {
+}
+
+[mastermind.jar] as jar
+
+jar *--> mastermind
+jar *--> mastermind.utils
+jar *--> java.io
+jar *--> java.util
+....
+
+
+== Vista de Despliegue/Física
+
+[plantuml,diagramaDespliegue,svg]
+....
+
+node node #DDDDDD [
+<b>Personal Computer</b>
+----
+memory : xxx Mb
+cpu : xxx GHz
+]
+
+[ masterming.jar ] as component
+
+node *--> component
+....
+
+== Vista de Procesos
+
+- No hay concurrencia
+
+
+
+
+
+
+
+
+
+
+
