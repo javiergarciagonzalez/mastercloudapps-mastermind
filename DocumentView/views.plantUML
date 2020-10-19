@@ -1,0 +1,107 @@
+@startuml DocumentView
+package Mastermind.views <<Rectangle>> {
+    class View {
+        - boardView : BoardView
+        
+        + View(Board board)
+        + play()
+    }
+
+    class SecretCombinationView {
+        
+    }
+
+    class ResultView {
+        - result: Result
+        
+        + writeln() : void
+    }
+
+    class ProposedCombinationView {
+        - proposeCombination : ProposeCombination
+        
+        + write() : void
+        + read() : void
+    }
+
+    enum MessageView {
+        + ATTEMPTS
+        + SECRET
+        + RESUME
+        + RESULT
+        + PROPOSED_COMBINATION
+        + TITLE
+        + WINNER
+        + LOOSER
+
+        - message : String
+        - console : Console
+
+        + write() : void
+        + writeln() : void
+        + writeln(int attemps) : void
+        + writeln(int blacks, int whites) : void
+
+    }
+
+    class ErrorView {
+        - Messages : String[]
+        - error : Error
+        + ErrorView(Error error)
+        + writeln() : void
+
+    }
+
+    class ConsoleView {
+        + console : Console
+        + ConsoleView()
+    }
+
+    class ColorView {
+        - {final} INITIALS : char[]
+        - color : Color
+        + ColorView()
+        + {static} allInitials : String
+        + {static} getInstance : Color
+        + write() : void
+
+    }
+
+    class BoardView {
+        - board : Board
+        + BoardView()
+        - startGame() : void
+        + play() : void
+        + writeln() : void
+    }
+}
+
+package Mastermind.models <<Rectangle>> {
+    class Board {}
+}
+
+package Mastermind.utils <<Rectangle>> {
+    class Console {}
+}
+
+BoardView --> Board
+BoardView ..> MessageView
+ResultView ..> MessageView
+ProposedCombinationView ..> MessageView
+SecretCombinationView ..> MessageView
+BoardView *--- View
+
+BoardView o--- SecretCombinationView
+BoardView o--- ResultView
+ProposedCombinationView ..> ErrorView
+
+ConsoleView ---> Console
+
+ConsoleView <|--- BoardView
+ConsoleView <|--- ResultView
+ConsoleView <|--- ProposedCombinationView
+ConsoleView <|--- ErrorView
+ConsoleView <|--- SecretCombinationView
+ConsoleView <|--- ColorView
+
+@enduml
