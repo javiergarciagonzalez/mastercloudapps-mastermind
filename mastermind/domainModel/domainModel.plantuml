@@ -3,35 +3,96 @@ skinparam Style strictuml
 
 title Mastermind
 
-class Mastermind
-class Board
-interface Code
-class SecretCode
-class GuessCode
-class FeedbackCode
+package Mastermind <<Rectangle>> {
+    class Mastermind {
+        +{static}main()
+        +play()
+    }
 
-enum GuessColor {
-    Red
-    Blue
-    Green
-    Yellow
-    Orange
+    class Board {
+        -MAX_ATTEMPS
+        -attemps
+        -guessCodes : ArrayList<GuessCode>
+        -secretCode : SecretCode
+        +playRound()
+        +getProposedCode()
+        +isGameFinished()
+    }
+
+    abstract class Code {
+        +{static}CODE_LENGTH : int
+        -{static}isvalidLength(String code)
+        +{static}isValidCode(String code)
+    }
+
+    class SecretCode extends Code {
+        -generateRandomCode()
+        -colorAt(int index)
+        -getBlacks(GuessCode guessCode)
+        -getWhites(GuessCode guessCode)
+        +checkCode(GuessCode guessCode)
+        +isSecretCode(GuessCode guessCode)
+    }
+
+    class GuessCode extends Code{
+        +isColorInCode(Color color)
+        +isColorAtExactPosition(Color color, int position)
+        +toString()
+    }
+
+    enum Color {
+        Red
+        Blue
+        Orange
+        Yellow
+        Green
+        NULL_COLOR
+        -{static} VALUES : List<Color>
+        -{static} SIZE : int
+        -{static} RANDOM : Random
+        +initial : char
+        +NULL : char
+
+        +{static}getInstance(char character) : Color
+        +{static}get(int index) : Color
+        +{static}getRandomColor() : Color
+        +{static}getRandomInitial() : char
+        +{static}isValidColor() : boolean
+    }
 }
 
-enum FeedbackColor {
-    Black
-    White
+package utils <<Rectangle>> {
+    class Console {
+        +{static}console : Console
+        +{static}instance : Console
+        +readString() : String
+        +readString(String title) : String
+        +write(String title) : void
+    }
+
+    class Logger {
+        +{static}logger : Logger
+        +{static}write(String text) : void
+        +{static}writeMessage(Messages message) : void
+    }
+
+    enum Messages {
+        ATTEMPS
+        PROPOSE_COMBINATION
+        COMBINATION_TIPS
+        WRONG_COLOR
+        WRITE_4_LETTERS_CODE
+        WRONG_CODE
+        WINNER
+        +text : String
+    }
 }
+
 
 Mastermind "1" *-- "1" Board
-Code <|--- SecretCode
-Code <|--- GuessCode
 
 Board "1" *--- "1" SecretCode
 Board "0" o--- "10" GuessCode
-Board "0" o--- "10" FeedbackCode
-
-GuessCode o-- GuessColor
-FeedbackCode o-- FeedbackColor
+Code "0" o--- "4" Color
 
 @enduml
