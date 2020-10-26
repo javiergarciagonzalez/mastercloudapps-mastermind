@@ -17,10 +17,6 @@ public class ActionController extends Controller {
         return this.session.addProposedCombination(colors);
     }
 
-    public void start() {
-
-    }
-
     public int getWidth() {
         return this.session.getWidth();
     }
