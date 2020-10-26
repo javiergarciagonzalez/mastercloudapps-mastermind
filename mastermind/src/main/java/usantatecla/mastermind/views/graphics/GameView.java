@@ -12,8 +12,6 @@ import usantatecla.mastermind.types.Color;
 import usantatecla.mastermind.types.Error;
 import usantatecla.mastermind.views.ErrorView;
 import usantatecla.mastermind.views.MessageView;
-import usantatecla.mastermind.views.graphics.ProposedCombinationView;
-import usantatecla.mastermind.views.graphics.SecretCombinationView;
 
 @SuppressWarnings("serial")
 class GameView extends JFrame {

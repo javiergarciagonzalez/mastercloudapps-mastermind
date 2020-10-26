@@ -5,9 +5,9 @@ import usantatecla.mastermind.views.MessageView;
 import usantatecla.utils.WithConsoleView;
 
 class ResultView extends WithConsoleView {
-    
+
     private ProposalController proposalController;
-    
+
     ResultView(ProposalController proposalController){
         this.proposalController = proposalController;
     }
