@@ -38,7 +38,7 @@ public class Game {
     public boolean isLooser() {
         return this.attempts == Game.MAX_LONG;
     }
-    
+
     public boolean isWinner() {
         return this.results.get(this.attempts-1).isWinner();
     }
@@ -61,6 +61,22 @@ public class Game {
 
     public int getWidth() {
         return Combination.getWidth();
+    }
+
+    public GameMemento createMemento() {
+        return new GameMemento();
+    }
+
+    public void set(GameMemento memento) {
+        // TODO
+        // this.turn.set(memento.getTurn().getToken().ordinal());
+        // for(int i=0; i<Coordinate.DIMENSION; i++){
+        //     for(int j=0; j<Coordinate.DIMENSION; j++){
+        //         Coordinate coordinate = new Coordinate(i,j);
+        //         this.board.put(coordinate, memento.getBoard().getToken(coordinate));
+        //     }
+        // }
+
     }
 
 }
