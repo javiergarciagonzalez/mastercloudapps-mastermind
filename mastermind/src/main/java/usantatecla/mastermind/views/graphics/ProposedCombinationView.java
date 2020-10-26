@@ -12,28 +12,28 @@ import usantatecla.mastermind.views.ColorView;
 @SuppressWarnings("serial")
 class ProposedCombinationView extends JLabel {
 
-	public static final int ERROR_CODE = -1;
-	
-	private ProposalController proposalController;
+    public static final int ERROR_CODE = -1;
+    
+    private ProposalController proposalController;
 
-	ProposedCombinationView(ProposalController proposalController) {
-		this.proposalController = proposalController;
-		String initials = "";
-		for (Color color : this.proposalController.getColors(this.proposalController.getAttempts()-1)) {
-			initials += new ColorView(color).getInitial();
-		}
-		this.setText(initials);
-	}
+    ProposedCombinationView(ProposalController proposalController) {
+        this.proposalController = proposalController;
+        String initials = "";
+        for (Color color : this.proposalController.getColors(this.proposalController.getAttempts()-1)) {
+            initials += new ColorView(color).getInitial();
+        }
+        this.setText(initials);
+    }
 
-	ProposedCombinationView() {
-	}
+    ProposedCombinationView() {
+    }
 
-	List<Color> read(String characters) {
-		List<Color> colors = new ArrayList<Color>();
-		for (int i=0; i<characters.length(); i++) {
-			colors.add(ColorView.getInstance(characters.charAt(i)));
-		}
-		return colors;
-	}
+    List<Color> read(String characters) {
+        List<Color> colors = new ArrayList<Color>();
+        for (int i=0; i<characters.length(); i++) {
+            colors.add(ColorView.getInstance(characters.charAt(i)));
+        }
+        return colors;
+    }
 
 }
