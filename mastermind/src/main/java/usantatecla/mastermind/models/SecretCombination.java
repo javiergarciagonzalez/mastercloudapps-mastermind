@@ -13,7 +13,7 @@ public class SecretCombination extends Combination {
 		for (int i = 0; i < Color.length() - Combination.getWidth(); i++) {
 			this.colors.remove(random.nextInt(this.colors.size()));
 		}
-		Collections.shuffle(this.colors);
+        Collections.shuffle(this.colors);
 	}
 
 	Result getResult(ProposedCombination proposedCombination) {

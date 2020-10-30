@@ -1,6 +1,7 @@
-package usantatecla.mastermind.views;
+package usantatecla.mastermind.views.console;
 
 import usantatecla.utils.WithConsoleView;
+import usantatecla.mastermind.views.MessageView;
 
 class StartView extends WithConsoleView {
 

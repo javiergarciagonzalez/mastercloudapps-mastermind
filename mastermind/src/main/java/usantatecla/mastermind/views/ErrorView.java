@@ -3,20 +3,20 @@ package usantatecla.mastermind.views;
 import usantatecla.mastermind.models.Error;
 import usantatecla.utils.WithConsoleView;
 
-class ErrorView extends WithConsoleView {
+public class ErrorView extends WithConsoleView {
 
-	private static final String[] MESSAGES = { 
+	private static final String[] MESSAGES = {
 			"Repeated colors",
-			"Wrong colors, they must be: " + ColorView.allInitials(), 
+			"Wrong colors, they must be: " + ColorView.allInitials(),
 			"Wrong proposed combination length" };
 
 	private Error error;
 
-	ErrorView(Error error) {
+    public ErrorView(Error error) {
 		this.error = error;
 	}
-	
-	void writeln() {
+
+	public void writeln() {
 		this.console.writeln(ErrorView.MESSAGES[this.error.ordinal()]);
 	}
 

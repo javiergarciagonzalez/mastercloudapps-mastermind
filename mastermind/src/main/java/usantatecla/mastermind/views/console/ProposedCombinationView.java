@@ -1,13 +1,16 @@
-package usantatecla.mastermind.views;
+package usantatecla.mastermind.views.console;
 
 import usantatecla.mastermind.models.Color;
 import usantatecla.mastermind.models.Error;
 import usantatecla.mastermind.models.Combination;
 import usantatecla.mastermind.models.ProposedCombination;
+import usantatecla.mastermind.views.MessageView;
+import usantatecla.mastermind.views.ErrorView;
+import usantatecla.mastermind.views.ColorView;
 import usantatecla.utils.WithConsoleView;
 
 class ProposedCombinationView extends WithConsoleView {
-	
+
 	private ProposedCombination proposedCombination;
 
 	ProposedCombinationView(ProposedCombination proposedCombination) {
