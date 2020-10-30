@@ -3,7 +3,6 @@ package usantatecla.mastermind.models;
 import java.util.List;
 
 import usantatecla.mastermind.types.Color;
-import usantatecla.mastermind.types.Error;
 
 public class Session {
 
@@ -14,33 +13,12 @@ public class Session {
     public Session() {
         this.game = new Game();
         this.state = new State();
+        this.registry = new GameRegistry(this.game);
     }
 
-    public Error addProposedCombination(List<Color> colors) {
-        Error error = null;
-        if (colors.size() != Combination.getWidth()) {
-            error = Error.WRONG_LENGTH;
-        } else {
-            for (int i = 0; i < colors.size(); i++) {
-                if (colors.get(i) == null) {
-                    error = Error.WRONG_CHARACTERS;
-                } else {
-                    for (int j = i+1; j < colors.size(); j++) {
-                        if (colors.get(i) == colors.get(j)) {
-                            error = Error.DUPLICATED;
-                        }
-                    }
-                }
-            }
-        }
-        if (error == null){
-            this.registry = new GameRegistry(this.game);
-            this.game.addProposedCombination(colors);
-            if (this.game.isWinner() || this.game.isLooser()) {
-                this.state.next();
-            }
-        }
-        return error;
+    public void addProposedCombination(List<Color> colors) {
+       this.game.addProposedCombination(colors);
+       this.registry.register();
     }
 
     public int getWidth() {

@@ -15,12 +15,12 @@ public class GraphicsView extends View {
         this.gameView = new GameView();
     }
 
-    
+
     public void visit(StartController startController) {
         this.gameView.interact(startController);
     }
 
-    
+
     public void visit(ProposalController proposalController) {
         this.gameView.interact(proposalController);
     }
@@ -37,11 +37,11 @@ public class GraphicsView extends View {
     }
 
     public void visit(UndoController undoController) {
-        this.gameView.interact(undoController);
+        // this.gameView.interact(undoController);
     }
 
     public void visit(RedoController redoController) {
-        this.gameView.interact(redoController);
+        // this.gameView.interact(redoController);
     }
 
 }

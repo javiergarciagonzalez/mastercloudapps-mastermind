@@ -64,19 +64,13 @@ public class Game {
     }
 
     public GameMemento createMemento() {
-        return new GameMemento();
+        return new GameMemento(this.attempts, this.results, this.proposedCombinations);
     }
 
     public void set(GameMemento memento) {
-        // TODO
-        // this.turn.set(memento.getTurn().getToken().ordinal());
-        // for(int i=0; i<Coordinate.DIMENSION; i++){
-        //     for(int j=0; j<Coordinate.DIMENSION; j++){
-        //         Coordinate coordinate = new Coordinate(i,j);
-        //         this.board.put(coordinate, memento.getBoard().getToken(coordinate));
-        //     }
-        // }
-
+        this.proposedCombinations = memento.getProposedCombinations();
+        this.results = memento.getResults();
+        this.attempts = memento.getAttempts();
     }
 
 }
