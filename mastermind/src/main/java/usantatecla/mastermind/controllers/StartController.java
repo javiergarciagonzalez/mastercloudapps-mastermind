@@ -2,19 +2,15 @@ package usantatecla.mastermind.controllers;
 
 import usantatecla.mastermind.models.Session;
 
-public class StartController extends Controller implements AcceptorController {
+public abstract class StartController extends AcceptorController {
 
     public StartController(Session session) {
         super(session);
     }
 
-    public void start() {
-        this.session.next();
-    }
+    public abstract void start();
 
-    public int getWidth() {
-        return this.session.getWidth();
-    }
+    public abstract int getWidth();
 
     @Override
     public void accept(ControllersVisitor controllersVisitor) {

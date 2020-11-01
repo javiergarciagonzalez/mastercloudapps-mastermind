@@ -4,13 +4,17 @@ import java.util.List;
 
 import usantatecla.mastermind.models.Combination;
 import usantatecla.mastermind.models.Session;
+import usantatecla.mastermind.models.SessionImplementation;
 import usantatecla.mastermind.types.Error;
 import usantatecla.mastermind.types.Color;
 
 public class ActionController extends Controller {
 
-    ActionController(Session session) {
+    private SessionImplementation sessionImplementation;
+
+    public ActionController(Session session) {
         super(session);
+        this.sessionImplementation = (SessionImplementation) this.session;
     }
 
     public Error addProposedCombination(List<Color> colors) {
@@ -31,39 +35,39 @@ public class ActionController extends Controller {
             }
         }
         if (error == null){
-            this.session.addProposedCombination(colors);
-            if (this.session.isWinner() || this.session.isLooser()) {
-                this.session.next();
+            this.sessionImplementation.addProposedCombination(colors);
+            if (this.sessionImplementation.isWinner() || this.sessionImplementation.isLooser()) {
+                this.sessionImplementation.next();
             }
         }
         return error;
     }
 
     public int getWidth() {
-        return this.session.getWidth();
+        return this.sessionImplementation.getWidth();
     }
 
     public boolean isWinner() {
-        return this.session.isWinner();
+        return this.sessionImplementation.isWinner();
     }
 
     public boolean isLooser() {
-        return this.session.isLooser();
+        return this.sessionImplementation.isLooser();
     }
 
     public int getAttempts() {
-        return this.session.getAttempts();
+        return this.sessionImplementation.getAttempts();
     }
 
     public List<Color> getColors(int position) {
-        return this.session.getColors(position);
+        return this.sessionImplementation.getColors(position);
     }
 
     public int getBlacks(int position) {
-        return this.session.getBlacks(position);
+        return this.sessionImplementation.getBlacks(position);
     }
 
     public int getWhites(int position) {
-        return this.session.getWhites(position);
+        return this.sessionImplementation.getWhites(position);
     }
 }

@@ -4,24 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import usantatecla.mastermind.models.Session;
-import usantatecla.mastermind.models.StateValue;
+import usantatecla.mastermind.types.StateValue;
 
 public class Logic {
 
-    private Session session;
-    private Map<StateValue, AcceptorController> controllers;
+    protected Session session;
+    protected Map<StateValue, AcceptorController> acceptorControllers;
 
     public Logic() {
-        this.session = new Session();
-        this.controllers = new HashMap<StateValue, AcceptorController>();
-        this.controllers.put(StateValue.INITIAL, new StartController(this.session));
-        this.controllers.put(StateValue.IN_GAME, new ProposalController(this.session));
-        this.controllers.put(StateValue.FINAL, new ResumeController(this.session));
-        this.controllers.put(StateValue.EXIT, null);
+        this.acceptorControllers = new HashMap<StateValue, AcceptorController>();
     }
 
     public AcceptorController getController() {
-        return this.controllers.get(this.session.getValueState());
+        return this.acceptorControllers.get(this.session.getValueState());
     }
 
 }

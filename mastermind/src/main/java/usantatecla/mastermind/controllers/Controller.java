@@ -1,5 +1,6 @@
 package usantatecla.mastermind.controllers;
 
+
 import usantatecla.mastermind.models.Session;
 
 public abstract class Controller {

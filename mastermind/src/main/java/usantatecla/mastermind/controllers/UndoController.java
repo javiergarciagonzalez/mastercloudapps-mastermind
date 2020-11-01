@@ -1,18 +1,22 @@
 package usantatecla.mastermind.controllers;
 
 import usantatecla.mastermind.models.Session;
+import usantatecla.mastermind.models.SessionImplementation;
 
 public class UndoController extends Controller {
 
-    UndoController(Session session) {
+    private SessionImplementation sessionImplementation;
+
+    public UndoController(Session session) {
         super(session);
+        this.sessionImplementation = (SessionImplementation) this.session;
     }
 
-    void undo() {
-        this.session.undo();
+    public void undo() {
+        this.sessionImplementation.undo();
     }
 
-    boolean isUndoable() {
-        return this.session.isUndoable();
+    public boolean isUndoable() {
+        return this.sessionImplementation.isUndoable();
     }
 }

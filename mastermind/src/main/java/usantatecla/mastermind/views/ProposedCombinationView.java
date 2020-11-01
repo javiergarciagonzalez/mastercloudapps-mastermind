@@ -1,4 +1,4 @@
-package usantatecla.mastermind.views.console;
+package usantatecla.mastermind.views;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 import usantatecla.mastermind.controllers.ProposalController;
 import usantatecla.mastermind.types.Color;
 import usantatecla.utils.WithConsoleView;
-import usantatecla.mastermind.views.MessageView;
 
 class ProposedCombinationView extends WithConsoleView {
 

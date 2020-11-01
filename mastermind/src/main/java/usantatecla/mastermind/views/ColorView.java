@@ -1,14 +1,16 @@
 package usantatecla.mastermind.views;
 
 import usantatecla.mastermind.types.Color;
+import usantatecla.utils.WithConsoleView;
 
-public class ColorView {
-    
+public class ColorView extends WithConsoleView {
+
     public static final char[] INITIALS = {'r', 'b', 'y', 'g', 'o', 'p'};
 
     protected Color color;
 
     public ColorView(Color color) {
+        super();
         this.color = color;
     }
 
@@ -19,7 +21,7 @@ public class ColorView {
         }
         return result;
     }
-    
+
     public char getInitial() {
         return ColorView.INITIALS[this.color.ordinal()];
     }
@@ -31,6 +33,10 @@ public class ColorView {
             }
         }
         return null;
+    }
+
+    void write() {
+        this.console.write(ColorView.INITIALS[this.color.ordinal()]);
     }
 
 }
