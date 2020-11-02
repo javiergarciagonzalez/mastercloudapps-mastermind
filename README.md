@@ -17,3 +17,6 @@ solución en Java o similar (fuertemente tipado) basada en el capitulo de Patron
 - mvp.pv, con:
 el diseño de clases, con plantuml en readme o con StarUML con el documento  
 solución en Java o similar (fuertemente tipado) basada en el capitulo de Patrones de Diseño y Arquitectura y el proyecto ticTacToe
+
+## UML Diagram
+![Diagram](https://raw.githubusercontent.com/javiergarciagonzalez/mastercloudapps-mastermind/mvp.pv/Diagramas/Mastermind-mvp.pv.jpg)
