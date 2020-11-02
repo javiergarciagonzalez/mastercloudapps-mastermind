@@ -35,7 +35,7 @@ public class Game {
         this.attempts++;
     }
 
-    public boolean isLooser() {
+    public boolean isLoser() {
         return this.attempts == Game.MAX_LONG;
     }
 

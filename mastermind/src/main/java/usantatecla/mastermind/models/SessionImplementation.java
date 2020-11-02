@@ -38,8 +38,8 @@ public class SessionImplementation implements Session {
         return this.game.isWinner();
     }
 
-    public boolean isLooser() {
-        return this.game.isLooser();
+    public boolean isLoser() {
+        return this.game.isLoser();
     }
 
     public int getAttempts() {

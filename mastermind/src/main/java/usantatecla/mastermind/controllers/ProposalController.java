@@ -16,7 +16,7 @@ public abstract class ProposalController extends AcceptorController {
 
     public abstract boolean isWinner();
 
-    public abstract boolean isLooser();
+    public abstract boolean isLoser();
 
     public abstract int getAttempts();
 

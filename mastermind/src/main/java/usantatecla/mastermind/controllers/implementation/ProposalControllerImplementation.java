@@ -32,8 +32,8 @@ public class ProposalControllerImplementation extends ProposalController {
         return this.actionController.isWinner();
     }
 
-    public boolean isLooser() {
-        return this.actionController.isLooser();
+    public boolean isLoser() {
+        return this.actionController.isLoser();
     }
 
     public int getAttempts() {

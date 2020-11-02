@@ -19,7 +19,7 @@ public class GameView extends WithConsoleView {
 
         if (proposalController.isWinner()) {
             this.console.writeln(MessageView.WINNER.getMessage());
-        } else if (proposalController.isLooser()) {
+        } else if (proposalController.isLoser()) {
             this.console.writeln(MessageView.LOOSER.getMessage());
         }
     }
